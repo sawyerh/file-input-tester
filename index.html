@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en-US">
+  <head>
+    <title>File type and size tester</title>
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+  </head>
+  <body>
+    <h2>Select a file</h2>
+    <input type="file" name="file" accept="image/*,.pdf" multiple />
+
+    <h2>File details</h2>
+    <div id="log"></div>
+
+    <script type="text/javascript">
+      var input = document.querySelector("input");
+      var log = document.querySelector("#log");
+
+      input.addEventListener("change", function (event) {
+        const files = Array.from(event.target.files);
+        log.innerHTML = "";
+
+        log.innerHTML = files
+          .map((file) => {
+            return `${file.type} ${(file.size / 1000000).toFixed(2)} MB`;
+          })
+          .join(" | ");
+      });
+    </script>
+  </body>
+</html>
